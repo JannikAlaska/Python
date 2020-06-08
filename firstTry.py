@@ -1,6 +1,5 @@
-import somemodule
-
-def fib(n=10):
+# coding: utf-8
+def fib(n):
 	if n<2:
 		return n
 	else:
@@ -12,6 +11,34 @@ def f(L=None):
 	L.append(42)
 	return L
 
+if __name__ == "__main__":
 
-var = somemodule.funk2(5,7)
-print (var)
+	f = open('Einkaufsliste','a')
+	f2 = open('Einkaufsliste', 'r')
+	f3 = open('Einkaufsliste', 'w')
+
+	def pruefen():
+		x = raw_input("Wollen Sie etwas zu Ihrer Liste hinzufügen, oder sie leeren?\n")
+
+		if x ==	"hinzufügen":
+			hinzu()
+		elif x == "leeren":
+			leeren()
+		else:
+			print("Bitte geben Sie hinzufügen oder leeren ein, um Ihre Liste zu bearbeiten.")
+			pruefen()
+
+	def hinzu():
+		#Hinzufügen
+		buy = raw_input("Was soll zur Einkaufsliste hinzugefügt werden?\n") 
+		f.write(str(buy)+ '\n')
+		string = f2.read()
+		print("Auf Ihrer Einkaufsliste steht:\n")	
+		print (string)
+
+	def leeren():
+		#Liste leeren
+		f3.write("")
+		print("Liste geleert")
+
+	pruefen()
