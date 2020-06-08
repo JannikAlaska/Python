@@ -14,7 +14,7 @@ def pruefen():
 		leeren()
 
 	else: #bei Falscheingabe wird die Abfrage nochmal ausgeführt
-		print("Bitte geben Sie hinzufügen oder leeren ein, um Ihre Liste zu bearbeiten.")
+		print("Bitte gebenn Sie (h) oder (l) zum Hinzufügen oder Leeren ein.")
 		pruefen()
 
 
@@ -24,13 +24,24 @@ def pruefen():
 
 def hinzu():
 
+	f = open('Einkaufsliste','r+')
+	
+	#buy- und read-Variablen füllen
 	buy = raw_input("Was soll zur Einkaufsliste hinzugefügt werden?\n") 
-	read1 = f.read()
-	wholeList = str(buy) + '\n' + str(read1)
-	f.write(str(wholeList))
-	read1 = ""
+
+	read1=f.read()
+	wholeList = buy + read1
+
+	#Hinzufügen der neuen Eingabe
+	f.write(str(wholeList) + '\n')
+
+
+	#Variablen wieder leeren
 	buy = ""
-	wholeList = ""
+
+	f.close()
+
+	#Abfrage, ob weitere Einträge hinzugefügt werden sollen
 	moreItems()
 
 #------------------------------------------------------------------------------------------------
@@ -39,7 +50,9 @@ def hinzu():
 
 def leeren(): #Liste leeren
 
-	f.truncate(0)
+	f = open('Einkaufsliste','r+')
+
+	f.truncate()
 	print("Liste geleert")
 
 #------------------------------------------------------------------------------------------------
@@ -47,10 +60,28 @@ def leeren(): #Liste leeren
 #------------------------------------------------------------------------------------------------
 
 def moreItems():
+
+
+	#Abfrage, ob neuer Eintrag hinzugefügt werden soll
 	more = raw_input("Wollen Sie noch etwas zur Liste hinzufügen? (j/n)")
 	if more == "j":
-		buymore = raw_input("Was soll zur Einkaufsliste hinzugefügt werden?\n") 
+
+		f = open('Einkaufsliste','r+')
+		
+		buymore = raw_input("Was soll zur Einkaufsliste hinzugefügt werden?\n")
+		print("buymore: " + buymore) 
+		
+		#Hinzufügen zur Liste
+		read2 = f.read()
+		f.truncate()
+		print("read2: " + read2)
+		wholeList2 = str(buymore) + '\n' + str(read2)
+		print("wholeList2: " + wholeList2)
 		f.write(str(buymore) + '\n')
+
+		f.close()
+
+		#rekursiver Aufruf, bis etwas anderes, als "j" eingegeben wird
 		moreItems()
 
 
@@ -60,11 +91,11 @@ def moreItems():
 
 if __name__ == "__main__":
 
-	f = open('Einkaufsliste','r+')
+
 
 	pruefen()
 
-
+	f = open('Einkaufsliste','r+')
 	print("Auf Ihrer Einkaufsliste steht:\n")
 	wholeList = f.read()
 	print(wholeList)
