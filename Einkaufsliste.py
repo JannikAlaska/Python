@@ -2,7 +2,7 @@
 
 
 #------------------------------------------------------------------------------------------------
-# Prüfung, was mit der Liste gemacht werden soll
+# query what to do with the list
 #------------------------------------------------------------------------------------------------
 def pruefen(): 
 	x = raw_input("Wollen Sie etwas zu Ihrer Liste (h)inzufügen, oder sie (l)eeren?\n")
@@ -13,39 +13,46 @@ def pruefen():
 	elif x == "l":
 		leeren()
 
-	else: #bei Falscheingabe wird die Abfrage nochmal ausgeführt
+	else: #restart the query in case of a wrong input
 		print("Bitte gebenn Sie (h) oder (l) zum Hinzufügen oder Leeren ein.")
 		pruefen()
 
 
 #------------------------------------------------------------------------------------------------
-# Hinzufügen
+# add
 #------------------------------------------------------------------------------------------------
 
 def hinzu():
 
 	f = open('Einkaufsliste','r+')
 	
-	#buy- und read-Variablen füllen
+	#fill the buy and read variables
 	buy = raw_input("Was soll zur Einkaufsliste hinzugefügt werden?\n") 
 
+	# // method1
 	read1=f.read()
-	wholeList = buy + read1
+	wholeList = read1 + buy
 
-	#Hinzufügen der neuen Eingabe
+	# add the new entry
 	f.write(str(wholeList) + '\n')
+	# // end method1
 
 
-	#Variablen wieder leeren
+	# // method2
+	# f.write(str(buy))
+	# // end method2
+
+
+	#empty the variables
 	buy = ""
 
 	f.close()
 
-	#Abfrage, ob weitere Einträge hinzugefügt werden sollen
+	#function to add more items to the list
 	moreItems()
 
 #------------------------------------------------------------------------------------------------
-# Leeren
+# empty
 #------------------------------------------------------------------------------------------------
 
 def leeren(): #Liste leeren
@@ -56,13 +63,13 @@ def leeren(): #Liste leeren
 	print("Liste geleert")
 
 #------------------------------------------------------------------------------------------------
-# Mehr hinzufügen
+# add more
 #------------------------------------------------------------------------------------------------
 
 def moreItems():
 
 
-	#Abfrage, ob neuer Eintrag hinzugefügt werden soll
+	#function to add more items to the list
 	more = raw_input("Wollen Sie noch etwas zur Liste hinzufügen? (j/n)")
 	if more == "j":
 
@@ -71,7 +78,7 @@ def moreItems():
 		buymore = raw_input("Was soll zur Einkaufsliste hinzugefügt werden?\n")
 		print("buymore: " + buymore) 
 		
-		#Hinzufügen zur Liste
+		#add to the list
 		read2 = f.read()
 		f.truncate()
 		print("read2: " + read2)
@@ -81,7 +88,7 @@ def moreItems():
 
 		f.close()
 
-		#rekursiver Aufruf, bis etwas anderes, als "j" eingegeben wird
+		#recursive call until a 'j' is entered
 		moreItems()
 
 
