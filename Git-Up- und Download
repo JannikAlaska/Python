@@ -1,0 +1,16 @@
+Upload:
+git add *
+git commit -m "Text"
+git push origin NameDesBranches
+
+Download:
+git pull
+
+Neuen Branch erstellen:
+git checkout -b neuerBranchName
+
+Branch wechseln:
+git checkout NameDesZielBranches
+
+Branch löschen:
+git branch -d zuLöschenderBranch
